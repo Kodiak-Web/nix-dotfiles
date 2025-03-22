@@ -16,6 +16,7 @@
       "unauthenticated" = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs { system = "x86_64-linux"; };
         modules = [
+          ./terminal.nix
           ./home.nix 
           ./hyprland.nix
           ./gaming.nix

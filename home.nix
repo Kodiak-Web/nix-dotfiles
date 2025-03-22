@@ -1,7 +1,7 @@
 { config, pkgs,lib, ... }:
 let
    contentsOf = file: lib.strings.removeSuffix  "\n" (builtins.readFile file); #trailing newline causes issues
-   usr = contentsOf ./user.name; 
+   usr = "unauthenticated"; 
    homedir = "/home/" + usr + "/";
 in
 {
@@ -12,14 +12,7 @@ in
     stateVersion = "24.05"; 
     packages = with pkgs; [
       cargo
-      xclip
-      fastfetch
-      htop
-      fzf
-      fish
-      neovim
       discord
-      git
       xdotool
       winetricks
       babelfish
@@ -29,7 +22,6 @@ in
       gimp
       playerctl
       spotify
-      gh
       python312Packages.proton-keyring-linux
       (nerdfonts.override { fonts = [ "FiraCode" ]; })
       #      (import (builtins.fetchTarball {
@@ -40,14 +32,10 @@ in
       bubblewrap
       dwarfs
       fuse-overlayfs
-      ripgrep
       zig
       zls
       python3
     ];
-    sessionVariables = {
-      EDITOR = "nvim";
-    };
   };
 # Let Home Manager install and manage itself.
 

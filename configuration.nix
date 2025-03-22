@@ -13,8 +13,8 @@
   boot.loader.systemd-boot.enable = true;
 
   boot.loader.efi.canTouchEfiVariables = true;
- # boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
- swapDevices = [ {
+  # boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
+  swapDevices = [ {
     device = "/var/lib/swapfile";
     size = 16*1024;
     randomEncryption.enable = true;
@@ -47,13 +47,16 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
-
+  services.udev.packages = with pkgs; [
+    via
+  ];
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   # Enable the Cinnamon Desktop Environment.
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.cinnamon.enable = true;
-    # Configure keymap in X11
+  services.xserver.windowManager.i3.enable = true;
+  # Configure keymap in X11
   services.xserver = {
     layout = "us";
     xkbVariant = "";
@@ -84,9 +87,6 @@
     isNormalUser = true;
     description = "unauthenticated";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    #  thunderbird
-    ];
   };
 
 
@@ -95,14 +95,13 @@
   nix.settings.experimental-features = ["nix-command" "flakes"];
   # List packages installed in system profile. To search, run:
   # $ nix search wget 
-  
   environment.systemPackages = with pkgs; [
-	protonvpn-gui
-	neovim
-	google-chrome
-	gnome.gnome-keyring
-	cachix
-	joycond
+    protonvpn-gui
+    neovim
+    google-chrome
+    gnome.gnome-keyring
+    cachix
+    joycond
 
   ];
   # Install firefox.
@@ -113,12 +112,11 @@
   programs.hyprland.enable = true;
   # Enable intel video driver
   #services.xserver.videoDrivers = [ "modesetting" "ati_unfree"];#"amdgpu"];
-  services.xserver.videoDrivers = [ "modesetting" "amdgpu" "mesa"];
-
+  services.xserver.videoDrivers = [ "nouveau" "modesetting"];
   boot.kernelParams = [ 
-  	"radeon.si_support=0" "amdgpu.si_support=1"
-        "radeon.cik_support=0" "amdgpu.cik_support=1" 
-	];
+    "radeon.si_support=0" "amdgpu.si_support=1"
+    "radeon.cik_support=0" "amdgpu.cik_support=1" 
+  ];
   # For wine32 bit
   hardware.opengl.driSupport32Bit = true;
 
@@ -134,7 +132,7 @@
 
 
 
-  
+
   users.defaultUserShell = pkgs.fish;
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -148,7 +146,9 @@
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
-
+  services.udev.extraRules = ''
+KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{serial}=="*vial:f64c2b3c*", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
+  ''; 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
@@ -164,5 +164,5 @@
   system.stateVersion = "24.05"; # Did you read the comment?
 
 
- 
+
 }
