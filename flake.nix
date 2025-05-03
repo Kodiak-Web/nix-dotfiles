@@ -18,7 +18,7 @@
         modules = [
           ./terminal.nix
           ./home.nix 
-          ./hyprland.nix
+          ./hypr
           ./gaming.nix
           ./devel.nix
           {

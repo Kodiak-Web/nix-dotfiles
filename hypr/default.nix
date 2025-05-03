@@ -8,7 +8,6 @@
       # hyprlock #doesn't work unless installed systemwide
       hypridle
       swaynotificationcenter
-      kitty # terminal
       wl-clipboard
       waybar
       seahorse
@@ -16,10 +15,9 @@
       wget
     ];
     file = {
-      ".config/kitty/kitty.conf".source = ./dotfiles/kitty.conf;
-      ".config/hypr/hyprland.conf".source = ./dotfiles/hypr/hyprland.conf;
-      ".config/hypr/hyprlock.conf".source =  ./dotfiles/hypr/hyprlock.conf;
-      ".config/hypr/hypridle.conf".source =  ./dotfiles/hypr/hypridle.conf;
+      ".config/hypr/hyprland.conf".source = ./hyprland.conf;
+      ".config/hypr/hyprlock.conf".source =  ./hyprlock.conf;
+      ".config/hypr/hypridle.conf".source =  ./hypridle.conf;
 
       };
   };

@@ -22,6 +22,8 @@
       SHELL = "fish";
     };
     file  = {
+
+      ".config/kitty/kitty.conf".source = ./kitty.conf;
       #"path/to/file".source = subfolder/file; #implicit ~/ in left hand side
     };
   };
