@@ -23,7 +23,6 @@ in
       playerctl
       spotify
       python312Packages.proton-keyring-linux
-      nerd-fonts.fira-code
       #      (import (builtins.fetchTarball {
       #  url = "https://github.com/ezKEa/aagl-gtk-on-nix/archive/main.tar.gz";
       #  sha256 = "1v9jk4j0zylx3ixwk5q8z22v6ir86pk9lfbf5q3ibgaggpf8kqa7";
