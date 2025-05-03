@@ -5,17 +5,22 @@
     stateVersion = "24.05"; 
     packages = with pkgs; [
       wofi #app launcher
+      # hyprlock #doesn't work unless installed systemwide
+      hypridle
       swaynotificationcenter
       kitty # terminal
       wl-clipboard
       waybar
-      gnome.seahorse
+      seahorse
       grimblast 
       wget
     ];
     file = {
       ".config/kitty/kitty.conf".source = ./dotfiles/kitty.conf;
-      ".config/hypr/hyprland.conf".source = ./dotfiles/hyprland.conf;      
-    };
+      ".config/hypr/hyprland.conf".source = ./dotfiles/hypr/hyprland.conf;
+      ".config/hypr/hyprlock.conf".source =  ./dotfiles/hypr/hyprlock.conf;
+      ".config/hypr/hypridle.conf".source =  ./dotfiles/hypr/hypridle.conf;
+
+      };
   };
 }

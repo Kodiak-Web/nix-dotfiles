@@ -5,17 +5,17 @@
     packages = with pkgs; [
       kitty
       fish
+      zoxide
       ripgrep
       fzf
       neovim
-      git
       btop
       wget
       fastfetch
       xclip
       wl-clipboard
-      gh
       bluetuith
+      wiper
     ];
     sessionVariables = {
       EDITOR = "nvim";

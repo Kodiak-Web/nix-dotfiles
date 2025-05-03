@@ -3,7 +3,7 @@
   home = {
     stateVersion = "24.05"; 
     packages = with pkgs; [
-     #list
+      #list
       #of 
       #packages 
       #here
